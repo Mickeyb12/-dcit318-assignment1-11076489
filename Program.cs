@@ -2,6 +2,7 @@
 
 using GradeCalculator;
 using TicketPriceCalculator;
+using TriangleTypeIdentifier;
 
 class Program
 {
@@ -10,7 +11,8 @@ class Program
         Console.WriteLine("Choose an option:");
         Console.WriteLine("1. Grade Calculator");
         Console.WriteLine("2. Ticket Price Calculator");
-        Console.Write("Enter option (1 or 2): ");
+        Console.WriteLine("3. Triangle Type Identifier");
+        Console.Write("Enter option (1, 2 or 3): ");
         string choice = Console.ReadLine()!;
 
         if (choice == "1")
@@ -45,9 +47,33 @@ class Program
                 Console.WriteLine("Invalid input. Please enter a valid age.");
             }
         }
+        else if (choice == "3")
+        {
+            Console.WriteLine("Enter the lengths of the three sides of the triangle:");
+            Console.Write("Side 1: ");
+            string side1Input = Console.ReadLine()!;
+            Console.Write("Side 2: ");
+            string side2Input = Console.ReadLine()!;
+            Console.Write("Side 3: ");
+            string side3Input = Console.ReadLine()!;
+
+            if (double.TryParse(side1Input, out double side1) &&
+                double.TryParse(side2Input, out double side2) &&
+                double.TryParse(side3Input, out double side3))
+            {
+                TriangleTypeIdentifier.TriangleTypeIdentifier triangleIdentifier = new TriangleTypeIdentifier.TriangleTypeIdentifier();
+                string triangleType = triangleIdentifier.IdentifyTriangleType(side1, side2, side3);
+                Console.WriteLine($"The triangle type is: {triangleType}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter valid numbers for the sides.");
+            }
+        }
         else
         {
             Console.WriteLine("Invalid choice. Exiting.");
         }
     }
 }
+
